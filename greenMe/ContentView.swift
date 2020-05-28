@@ -124,8 +124,11 @@ struct challengeCard : View {
     var body : some View{
         HStack {
             Text(definition)
+            .padding([.horizontal, .bottom])
             Text(duration)
-
+            .font(.headline)
+            .lineLimit(10)
+            .padding([.horizontal, .bottom])
         }
     }
 }
@@ -140,7 +143,7 @@ struct SecondContentView: View {
         NavigationView {
         
             ScrollView(.vertical) {
-                VStack {
+                VStack(alignment: .leading) {
                 Text("All greenMe 🌳 Challenges").fontWeight(.heavy)
                 ForEach(obs.datas, id: \.id) { i in
             NavigationLink(destination:
@@ -150,9 +153,10 @@ struct SecondContentView: View {
                 }
                                 
                 }
+                .frame(width: 400, height: 400)
                 
             }.padding()
-        }
+        }.background(LinearGradient(gradient: Gradient(colors: [Color("Start"), Color("Middle"), Color("End")]), startPoint: .top, endPoint: .bottom))
         .offset(y: 120)
         .edgesIgnoringSafeArea(.all)
        }
