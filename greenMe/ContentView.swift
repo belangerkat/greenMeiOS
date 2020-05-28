@@ -15,9 +15,12 @@ struct ContentView: View {
     @ObservedObject var obs = durationFetchRequest()
     
     @State var showingAddChallenge = false
+    @State var showingSignUp = false
     
     var body: some View {
+    
     NavigationView {
+    
         List {
             Text("Choose the Duration of Your Sustainability Challenge!")
             ForEach(obs.datas, id: \.id) { i in
@@ -27,14 +30,21 @@ struct ContentView: View {
                 }
 
             }
+            NavigationLink(destination: SecondContentView()) {
+                Text("View All Challenges 🌎").fontWeight(.heavy)
+            }
+                            
         }.navigationBarTitle("greenMe 🌳")
-        .navigationBarItems(leading: EditButton(), trailing: Button("Add") {
+            .navigationBarItems(leading: Button("Sign Up") {self.showingSignUp.toggle()}, trailing: Button("Add Challenge") {
         self.showingAddChallenge.toggle()
+        }.sheet(isPresented: $showingAddChallenge) {
+            AddView()
         })
     }
-    .sheet(isPresented: $showingAddChallenge) {
-            AddView()
-        }
+    
+    .sheet(isPresented: $showingSignUp) {
+        SignUpView()
+    }
     }
 }
 
@@ -47,7 +57,6 @@ struct ContentView_Previews: PreviewProvider {
 class durationFetchRequest: ObservableObject{
     
     @Published var datas = [dataType]()
-//    @Published var challengedata = [challenge]()
     
     init() {
         AF.request("https://green-me-backend.herokuapp.com/durations").responseData {(data) in
@@ -55,12 +64,24 @@ class durationFetchRequest: ObservableObject{
             
             for i in json{
                 
-//                let challenge = i.1["challenges"]["definition"].stringValue{
-//                print(challenge)
-//
-//                self.challengedata.append(challenge(id: i.1["id"].intValue, definition: i.1["definition"].stringValue, difficultyId: i.1["difficulty_id"].intValue))
-                
                 self.datas.append(dataType(id: i.1["id"].intValue, length: i.1["length"].stringValue, points: i.1["points"].intValue, challenges: i.1["challenges"][0]["definition"].stringValue))
+            }
+        }
+    }
+    
+}
+
+class challengeFetchRequest: ObservableObject{
+    
+    @Published var datas = [challenge]()
+    
+    init() {
+        AF.request("https://green-me-backend.herokuapp.com/challenges").responseData {(data) in
+            let json = try! JSON(data: data.data!)
+            
+            for i in json{
+                
+                self.datas.append(challenge(id: i.1["id"].intValue, definition: i.1["definition"].stringValue, difficulty: i.1["difficulty"]["rank"].stringValue, duration: i.1["duration"]["length"].stringValue))
             }
         }
     }
@@ -70,7 +91,8 @@ class durationFetchRequest: ObservableObject{
 struct challenge : Identifiable {
     var id: Int
     var definition: String
-    var difficultyId: Int
+    var difficulty: String
+    var duration: String
 }
 
 struct dataType : Identifiable {
@@ -96,39 +118,43 @@ struct durationCard : View {
 
 struct challengeCard : View {
     var definition = ""
+    var difficulty = ""
+    var duration = ""
+    
     var body : some View{
-        Text(definition)
+        HStack {
+            Text(definition)
+            Text(duration)
+
+        }
     }
 }
 
-//struct SecondContentView: View {
-//    
-//     @ObservedObject var obs = durationFetchRequest()
-//    
-//    let durationArray = []
+struct SecondContentView: View {
     
-//    func getChallenges () {
-//        ForEach(obs.datas, id: \.id) { i in
-//            print(i.challenges)
-//        }
-//    }
-//
+    @ObservedObject var obs = challengeFetchRequest()
     
-//    var body: some View {
-//
-//         @ObservedObject var obs = durationFetchRequest()
-//
-//
-//       NavigationView {
-//           List {
-//            ForEach(obs.datas.challenges, id: \.id) { challenge in
-//           NavigationLink(destination:
-            
-//            {
-//                challengeCard(definition: challenge.definition)
-//                   }
-//               }
-//           }
-//       }
-//
-//}
+     
+    
+    var body: some View {
+        NavigationView {
+        
+            ScrollView(.vertical) {
+                VStack {
+                Text("All greenMe 🌳 Challenges").fontWeight(.heavy)
+                ForEach(obs.datas, id: \.id) { i in
+            NavigationLink(destination:
+            Text(i.difficulty)) {
+                    challengeCard(definition: i.definition, duration: i.duration)
+                    }
+                }
+                                
+                }
+                
+            }.padding()
+        }
+        .offset(y: 120)
+        .edgesIgnoringSafeArea(.all)
+       }
+
+}

@@ -17,6 +17,8 @@
 		BE74E10A247EF36D0070877A /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = BE74E109247EF36D0070877A /* SwiftyJSON */; };
 		BE74E10C247F0D3C0070877A /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE74E10B247F0D3C0070877A /* EmojiView.swift */; };
 		BE74E112247FEA200070877A /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE74E111247FEA200070877A /* AddView.swift */; };
+		BE74E116248028CE0070877A /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE74E115248028CD0070877A /* SignUpView.swift */; };
+		BE74E11824802D0B0070877A /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE74E11724802D0B0070877A /* SignInView.swift */; };
 		EDC8FA91DD43519B1DA7BDE2 /* Pods_greenMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D53E4D71A2F9C796D7209C64 /* Pods_greenMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		BE74E0FF247EE3100070877A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE74E10B247F0D3C0070877A /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		BE74E111247FEA200070877A /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		BE74E115248028CD0070877A /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		BE74E11724802D0B0070877A /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		D53E4D71A2F9C796D7209C64 /* Pods_greenMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_greenMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,8 @@
 				BE74E0FF247EE3100070877A /* Info.plist */,
 				BE74E0F9247EE3100070877A /* Preview Content */,
 				BE74E111247FEA200070877A /* AddView.swift */,
+				BE74E115248028CD0070877A /* SignUpView.swift */,
+				BE74E11724802D0B0070877A /* SignInView.swift */,
 			);
 			path = greenMe;
 			sourceTree = "<group>";
@@ -233,9 +239,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE74E0F2247EE30C0070877A /* AppDelegate.swift in Sources */,
+				BE74E11824802D0B0070877A /* SignInView.swift in Sources */,
 				BE74E10C247F0D3C0070877A /* EmojiView.swift in Sources */,
 				BE74E112247FEA200070877A /* AddView.swift in Sources */,
 				BE74E0F4247EE30C0070877A /* SceneDelegate.swift in Sources */,
+				BE74E116248028CE0070877A /* SignUpView.swift in Sources */,
 				BE74E0F6247EE30C0070877A /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
